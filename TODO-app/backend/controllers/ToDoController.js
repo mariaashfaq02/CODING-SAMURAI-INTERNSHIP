@@ -5,8 +5,8 @@ const ToDoModel=require("../models/ToDoModel");
 //get all toDos
 module.exports.getToDo=async(req,res)=>{
     //givs us all to-do's from database
-    const toDo=await ToDoModel.find();
-    res.send(ToDo);
+    const toDos=await ToDoModel.find();
+    res.send(toDos);
 }
 
 //save a toDo
