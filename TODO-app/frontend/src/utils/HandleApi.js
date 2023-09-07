@@ -34,7 +34,7 @@ const addToDo =(text,setText,setToDo)=>{
 }
 
 const updateToDo =(toDoId,text,setToDo,setText,setIsUpdating)=>{
-    //remember how we saved our todo data in baseURl/save page in backend?
+    //remember how we saved our todo data in baseURl/update page in backend?
     axios
     .post(`${baseUrl}/update`,{_id: toDoId,text})
     .then((data)=>{
@@ -43,7 +43,22 @@ const updateToDo =(toDoId,text,setToDo,setText,setIsUpdating)=>{
         //since you have updated,set it back to false
         setIsUpdating(false);
         //re-render the page and show all the to-do's
-        //including the one you just wrote
+        //including the one you just updated
+        getAllToDo(setToDo);
+    })
+    .catch((err)=>{
+        console.log(err);
+    })   
+}
+
+const deleteToDo =(_id,setToDo)=>{
+    //remember how we took all our deleted to do;s to /delete?
+    axios
+    .post(`${baseUrl}/delete`,{_id: _id})
+    .then((data)=>{
+        //show deleted data in console
+        console.log(data);
+        //re-render the page and show all the to-do's
         getAllToDo(setToDo);
     })
     .catch((err)=>{
@@ -51,4 +66,4 @@ const updateToDo =(toDoId,text,setToDo,setText,setIsUpdating)=>{
     })
     
 }
-export {getAllToDo,addToDo,updateToDo};
+export {getAllToDo,addToDo,updateToDo,deleteToDo};
